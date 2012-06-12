@@ -1,0 +1,69 @@
+# List of item type behaviours. The following formats are supported.
+# wander, <type name>
+# interact, <source type>, <target type>, <new source type>, <new target type>, <frequency>
+# seek, <type name>, <type sought>
+# light, <type name>, <intensity>
+# Where frequency is how many turns pass between interactions, or 0 for interacting with
+# everything possible every turn.
+wander, rabbit
+wander, angry treant
+seek, angry treant, person
+seek, angry treant, pile of wood
+seek, angry treant, wall
+# Fire ignites nearby things - some faster than others!
+change, new fire, fire, 1
+interact, fire, pile of wood, fire, fire, 3
+interact, fire, tree, fire, fire, 11
+interact, fire, wall, fire, fire, 23
+interact, fire, sleeping treant, fire, angry treant, 19
+interact, fire, angry treant, fire, fire, 45
+interact, fire, wooden floor, fire, rubble, 31
+interact, fire, door, fire, fire, 18
+interact, fire, door floor, fire, rubble, 28
+interact, fire, open door floor, fire, rubble, 28
+# But it also dies out eventually. Adding fuel will turn the fire into a new fire, which then
+# instantly turns into fire with a reset age timer.
+change, fire, pile of ash, 200
+# The angry treant will do various things.
+interact, angry treant, person, angry treant, corpse, 2
+interact, angry treant, pile of wood, angry treant, tree, 2
+interact, angry treant, wall, angry treant, pile of wood, 3
+change, angry treant, sleeping treant, 500
+# Food rots, even cooked food.
+change, dead rabbit, rotted rabbit corpse, 250
+change, skinned rabbit, rotted rabbit corpse, 200
+change, dressed dead rabbit, rotted rabbit corpse, 200
+change, fatty rabbit steak, rotted rabbit meat, 180
+change, lean rabbit steak, rotted rabbit meat, 180
+change, prepared rabbit steak, rotted rabbit meat, 180
+change, cooked rabbit steak, rotted rabbit meat, 2000
+# Rubble eventually grows back into grass.
+change, rubble, grass, 10000
+# Make rabbits multiply.
+interact, rabbit, nothing, rabbit, rabbit, 4000
+# Grass, having had fat/ash tipped out on it, should spawn fat/ash and revert.
+interact, grass with fat, nothing, grass, lump of fat, 1
+change, grass with fat, grass, 1
+interact, grass with ash, nothing, grass, pile of ash, 1
+change, grass with ash, grass, 1
+# Doors.
+# Can just use ground supertype here, which means this transform works on all floors, turning them into door floors.
+interact, door, ground, door, door floor, 1
+# An open door turns the door floor beneath it into an open door floor and then vanishes.
+interact, open door, door floor, nothing, open door floor, 1
+change, open door, nothing, 1
+# A little while later, the open door floor re-appears.
+interact, open door floor, nothing, door floor, door, 12
+# Walls make floors
+interact, wall, grass, wall, wooden floor, 1
+interact, torn down wall, wooden floor, torn down wall, grass, 1
+change, torn down wall, pile of wood, 1
+# Ash eventually is dissipated
+change, pile of ash, nothing, 2500
+# Branches burn out
+change, burning branch, nothing, 100
+interact, burning branch, grass, nothing, grass, 7
+interact, burning branch, wooden floor, nothing, wooden floor, 10
+# Fire produces light.
+light, fire, 12
+light, burning branch, 7

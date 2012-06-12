@@ -1,0 +1,88 @@
+# List of transformations from using one item on the other.
+# There are two formats:
+# To define a transformation: use, carried item, target item, new carried item, new target item, description
+# As a shorthand for picking something up: pickup, item
+
+# Pick up an axe, chop down wood, and make a fire. New fire decays into fire immediately, but the
+# distinction is made so that a pile of wood can reset the fire's age timer.
+pickup, axe
+use, axe, tree, axe, pile of wood, chop down a tree
+pickup, pile of wood
+use, pile of wood, pile of wood, nothing, new fire, start a fire
+use, pile of wood, fire, nothing, new fire, add fuel to the fire
+
+# Pick up a bucket, fill it with water, douse the fire, and fill the bucket with ash.
+pickup, bucket
+use, bucket, well, bucket of water, well, draw water from the well
+pickup, bucket of water
+use, bucket of water, fire, bucket, pile of ash, douse the fire
+use, bucket, pile of ash, bucket of ash, nothing, fill the bucket with ash
+pickup, bucket of ash
+
+# Pick up a knife and kill/prepare/cook/eat a rabbit. It will go off eventually if not smoked.
+pickup, knife
+pickup, rabbit
+use, knife, rabbit, knife, dead rabbit, kill the rabbit
+use, axe, rabbit, axe, dead rabbit, kill the rabbit
+pickup, dead rabbit
+use, knife, dead rabbit, knife, skinned rabbit, skin and clean the rabbit
+use, nothing, skinned rabbit, rabbit skin, dressed dead rabbit, take the skin off the rabbit
+pickup, rabbit skin
+use, nothing, dressed dead rabbit, fatty rabbit steak, rabbit bones, take the meat off the rabbit
+pickup, fatty rabbit steak
+pickup, rabbit bones
+use, knife, fatty rabbit steak, knife, prepared rabbit steak, clean up the rabbit meat
+use, nothing, prepared rabbit steak, lump of fat, lean rabbit steak, take the fat off the meat
+pickup, lump of fat
+pickup, lean rabbit steak
+use, fatty rabbit steak, fire, cooked rabbit steak, fire, cook the rabbit meat on the fire
+use, lean rabbit steak, fire, cooked rabbit steak, fire, cook the rabbit meat on the fire
+pickup, cooked rabbit steak
+use, knife, cooked rabbit steak, knife, nothing, eat the rabbit meat
+pickup, rotted rabbit corpse
+pickup, rotted rabbit meat
+use, cooked rabbit steak, fire, smoked rabbit meat, fire, smoke the rabbit steak
+use, knife, smoked rabbit meat, knife, nothing, eat the rabbit meat
+
+# Combine ash and fat, and make soap, and wash.
+use, bucket, lump of fat, bucket of fat, nothing, fill the bucket with fat
+use, lump of fat, bucket, nothing, bucket of fat, fill the bucket with fat
+use, bucket of ash, lump of fat, bucket of ash and fat, nothing, add fat to the bucket
+use, lump of fat, bucket of ash, nothing, bucket of ash and fat, add fat to the bucket
+use, bucket of fat, pile of ash, bucket of ash and fat, nothing, add ash to the bucket
+pickup, bucket of fat
+pickup, bucket of ash and fat
+use, bucket of ash and fat, fire, bucket of soap, fire, turn the bucket's contents into soap
+use, nothing, bucket of soap, lump of soap, bucket, pry the soap from the bucket
+pickup, lump of soap
+use, lump of soap, bucket of water, lump of soap, bucket of soapy water, add soap to the water
+use, nothing, bucket of soapy water, nothing, bucket, wash yourself
+
+# Make walls.
+use, axe, pile of wood, axe, wall, fashion a section of wall
+use, axe, wall, axe, torn down wall, tear down a section of wall
+use, pile of wood, grass, pile of wood, wooden floor, make a section of wooden floor
+
+# Piss off a tree that turns out to be a treant. Note that we can use commas in the final column.
+use, axe, sleeping treant, axe, angry treant, swing your axe at a tree, which turns out to be alive..
+use, burning branch, sleeping treant, nothing, angry treant, try to set the tree on fire, which turns out to be alive..
+
+# Tip out the bucket on the ground / into the well.
+use, bucket of water, grass, bucket, grass, pour out the bucket
+use, bucket of ash, grass, bucket, grass with ash, pour out the bucket
+use, bucket of fat, grass, bucket, grass with fat, pour out the bucket
+use, bucket of water, well, bucket, well, pour the water down the well
+
+# Make a door
+use, knife, wall, knife, door, make a door
+use, nothing, door, nothing, open door, open the door
+# Sadly, can't say use, anything, door, anything, open door, open the door - since that would transform whatever you're carrying into an "anything". Kudos for a good fix for this.
+
+# Get a burning branch
+pickup, burning branch
+use, nothing, fire, burning branch, fire, take a burning branch out of the fire
+use, burning branch, pile of wood, burning branch, new fire, start a fire
+use, burning branch, tree, burning branch, new fire, set the tree on fire
+
+# Note that this doesn't turn the fire into a new fire, and hence this doesn't refuel the fire.
+use, burning branch, fire, nothing, fire, throw the branch into the fire

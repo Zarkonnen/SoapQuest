@@ -1,0 +1,51 @@
+# This is a CSV file of the items in the game.
+# The format first specifies the name, then the colour of the item:
+# <name>, <r>, <g>, <b> [, <displayname> [, <supertype>]
+axe, 127, 127, 127
+tree, 0, 91, 0
+
+# new fire is fire that has been freshly created or refueled. This is used to allow refueling a fire by adding more wood.
+fire, 255, 15, 0
+new fire, 255, 15, 0, fire
+burning branch, 255, 50, 0
+pile of wood, 91, 64, 0
+well, 63, 63, 91
+bucket, 191, 191, 191
+bucket of water, 191, 191, 255
+bucket of ash, 50, 50, 50
+bucket of fat, 230, 230, 180
+bucket of ash and fat, 160, 160, 145
+bucket of soap, 170, 170, 170
+pile of ash, 15, 15, 15
+rabbit, 200, 200, 191
+dead rabbit, 255, 200, 191
+skinned rabbit, 191, 0, 0
+rabbit skin, 210, 210, 200
+dressed dead rabbit, 191, 0, 0
+fatty rabbit steak, 191, 0, 0
+lean rabbit steak, 191, 0, 0
+prepared rabbit steak, 191, 0, 0
+cooked rabbit steak, 160, 0, 0
+lump of fat, 255, 255, 200
+lump of soap, 191, 191, 170
+knife, 150, 150, 150
+rabbit bones, 240, 240, 240
+bucket of soapy water, 200, 200, 155
+wall, 80, 55, 0
+torn down wall, 80, 55, 0
+wooden floor, 100, 75, 40, wooden floor, ground
+sleeping treant, 0, 91, 0, tree
+angry treant, 0, 81, 0
+rotted rabbit corpse, 160, 50, 10
+rotted rabbit meat, 160, 50, 10
+smoked rabbit meat, 80, 0, 0
+# Rubble is a type of ground.
+rubble, 85, 80, 75, rubble, ground
+# These are just transitional items that spawn ash/fat and never appear on the map.
+grass with ash, 0, 0, 0, grass with ash, ground
+grass with fat, 0, 0, 0, grass with fat, ground
+# The door consists of multiple items to work. The door itself spawns a door floor below it. The door floor will regenerate the door if it's missing. Moving into the door will cause it to turn into an open door, turn the door floor into an open door floor, and then disappear. The open door floor then turns into a door floor again after 12 turns, automatically closing the door again.
+door, 90, 65, 10
+open door, 90, 65, 10
+door floor, 100, 75, 40
+open door floor, 100, 75, 40, open door floor, ground
