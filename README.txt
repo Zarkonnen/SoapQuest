@@ -1,7 +1,9 @@
 SoapQuest is hereby released under the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0.html
 
-SOAPQUEST 1045
+SOAPQUEST 1024
 "You can't use a rabbit on a rabbit."
+
+You can play the game online as a Java applet at http://www.zarkonnen.com/soapquest/
 
 SoapQuest 1024 is a small game I decided to write after reading "20 Open World Games" on Gamasutra and coming across "Adventure".
 
