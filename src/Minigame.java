@@ -12,6 +12,11 @@ import java.io.PrintWriter;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import java.util.HashMap;
 
 /**
  * Minigame is a very simple computer game implemented in less than 1000 LOC that hopefully has
@@ -200,6 +205,29 @@ public class Minigame extends Canvas implements KeyListener {
 		loadRules();
 		loadMap();
 		doLightCalculations();
+	}
+	
+	protected HashMap<String, Clip> sounds = new HashMap<String, Clip>();
+	
+	protected void playSound(String name) {
+		try {
+			if (!sounds.containsKey(name)) {
+				sounds.put(name, getClip(name));
+			}
+			sounds.get(name).setFramePosition(0);
+			sounds.get(name).start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/** Plays sound from sounds folder. */
+	protected Clip getClip(String name) throws Exception {
+		AudioInputStream stream = AudioSystem.getAudioInputStream(new File(new File(getGameFolder(), "sounds"), name + ".wav"));
+		DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat());
+		Clip clip = (Clip) AudioSystem.getLine(info);
+		clip.open(stream);
+		return clip;
 	}
 	
 	protected void initBaseRules() {
